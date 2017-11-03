@@ -16,7 +16,7 @@ cd examples
 yarn
 yarn start
 ```
-...then scan the QR code in the Expo app
+...then scan the QR code in the Expo app.
 
 ## Installation
 > npm install --save react-native-declan
@@ -30,9 +30,10 @@ or
 We suggest reading the Fuse [documentation for Animations](https://www.fusetools.com/docs/declarative-animation) to get a better sense for what react-native-declan strives to be and how to implement compelling user interactions with a truly declarative API. In lieu of that, here is a summary.
 
 There are three main entities that react-native-declan comprises:
-- Animators - descriptions of how components change
-- Triggers - stimuli that invoke change
-- Components - what will change
+- `Animator`s - descriptions of how components change
+- `Trigger`s - stimuli that invoke change, wrap a set of `Animator`s
+- Higher-Order `Animator`s - like the offspring of `Animator` and `Trigger`, wrap and invoke a set of `Animator`s, but also behave like an `Animator`
+- `Components` - what will change
 
 ### Animators
 
@@ -56,6 +57,31 @@ Example:
 
 The above snippet describes a movement of the component referenced by `elementToMove`, which will move right 80 pixels over 1 second with a bounce easing curve...when triggered.
 
+#### Supported Animators
+
+| Name | Props | Description | Notes |
+| ---- | ------| ----------- | --------- |
+| `Move` | `x`: number, `y`: number | Translate by `x` or `y` or both | - |
+| `Scale` | `x`: number, `y`: number, `factor`: number | Scale by `x` or `y` or `factor` (both) from center of `AnimatableView` | - |
+| `Rotate` | `degrees`: number, `degreesX`: number, `degreesY`: number, `degreesZ`: number | Rotate reference `AnimatableView` by props from center | `degrees` is an alias of `degreesZ` |
+| `Fade` | `value`: number | Chance opacity of referenced `AnimatableView` to `value` | - |
+| `Change` | `field`: string, `value`: number | Chance a style property `field` of referenced `AnimatableView` to `value` | (1) Only one of these can apply to an `AnimatableView`, (2) This `Animator` does not use the native driver, so use sparingly! |
+
+All of the above `Animator`s also take the following props:
+
+| Prop | Type | Description |
+| ---- | ---- | ----------- |
+| `getTargetRef` | () => `AnimatableView` | Function that returns the `AnimatableView` the `Animator` should apply to |
+| `initialValue` | number or `{ x: number, y: number }` | Depending on the type of Trigger used, you may need to specify where the `Animator` should return to. Some just take a value (e.g. `Fade`), while others take `x` and `y` (e.g. `Move`) |
+| `onFinish` | () => void | Callback called when `Animator` finishes playing forward |
+| `onFinishBack` | () => void | Callback called when `Animator` finishes playing backward |
+| `duration` | number | Duration of forward animation |
+| `durationBack` | number | Duration of backward animation |
+| `delay` | number | Delay before starting forward animation |
+| `delayBack` | number | Delay before starting backward animation |
+| `easing` | `Easing` | [Easing](https://facebook.github.io/react-native/docs/easing.html) function to apply to forward animation |
+| `easingBack` | `Easing` | [Easing](https://facebook.github.io/react-native/docs/easing.html) function to apply to backward animation |
+
 ### Triggers
 
 Triggers actually cause change to happen. This is where we take the user's actions into account. There are three types of triggers:
@@ -66,7 +92,7 @@ Triggers actually cause change to happen. This is where we take the user's actio
 #### Supported triggers
 
 | Name | Props | Description | Notes |
-| ---- | -------- | ---- | --------- |
+| ---- | ------| ----------- | --------- |
 | `ManualTrigger` | - | A wrapper for a set of `Animator`s that you can trigger by calling `.start()` | - |
 | `Mounted` | - | Triggers its `Animator`s when this trigger is mounted | Put this at the bottom of the component tree to ensure it mounts last |
 | `WhileTrue` | `value`: boolean | Triggers its `Animator`s when `value` evaluates to true, stops the `Animator`s when false | - |
@@ -75,6 +101,29 @@ Triggers actually cause change to happen. This is where we take the user's actio
 | `StateGroup` | `defaultState`: string | This is a sort of wrapper Trigger for `State` | Trigger a specific state by calling `goToState` on this component's ref |
 | `State` | `name`: string | Will trigger its `Animator`s when parent `StateGroup` changes to this state, and play backward when changed away from this state | - |
 
+### Higher-Order animators
+
+| Name | Props | Description |
+| ---- | ----- | ----------- |
+| Parallel | - | When started, plays all its children forward, when stopped plays them backward |
+| Cycle | - | Plays its children `Animator`s playing forward, and restarts them all when the last one finishes playing |
+| Sequence | - | Plays each child `Animator` forward one-by-one (when the first finishes, second one beings, etc.) |
+| Stagger | `eachDelay`: number | When started, plays each child `Animator` with delay `eachDelay` between then, same behavior on stop |
+
+All of the higher-order components also pass onto its children the following properties:
+- `getTargetRef`
+- `x`
+- `y`
+- `initialValue`
+- `value`
+- `duration`
+- `easing`
+- `delay`
+- `durationBack`
+- `easingBack`
+- `delayBack`
+
+See the [Stagger Demo](https://github.com/ChefSteps/react-native-declan/blob/master/examples/views/StaggerDemo/index.js) for usage example.
 
 ### Components
 

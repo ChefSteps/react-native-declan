@@ -11,8 +11,8 @@ class ManualTrigger extends BaseTrigger implements Animator {
   target: ?AnimatableView;
   value: AnimatedValue;
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.id = uuid.v4();
     this.target = null;
   }

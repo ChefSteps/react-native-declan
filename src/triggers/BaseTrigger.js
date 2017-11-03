@@ -21,6 +21,7 @@ class BaseTrigger<D, P: any, S> extends Component<D, P, S> {
   cloneAnimator = (animator: React.Element<*>, index: number) => {
     const events = new EventEmitter();
     return React.cloneElement(animator, {
+      ...(this.propertiesToAppend || {}),
       // eslint-disable-next-line react/no-array-index-key
       key: index,
       ref: ref => {
@@ -32,9 +33,8 @@ class BaseTrigger<D, P: any, S> extends Component<D, P, S> {
           animator.ref(ref);
         }
       },
-      onFinish: () => events.emit('finish'),
-      onFinishBack: () => events.emit('finish_back'),
-      ...(this.propertiesToAppend || {}),
+      onFinish: ({finished}) => events.emit('finish', {finished}),
+      onFinishBack: ({finished}) => events.emit('finish_back', {finished}),
     });
   };
 

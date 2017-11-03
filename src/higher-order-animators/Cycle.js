@@ -1,8 +1,8 @@
 // @flow
 
-import ManualTrigger from '../triggers/ManualTrigger';
+import BaseHOA from './BaseHigherOrderAnimator';
 
-class Cycle extends ManualTrigger {
+class Cycle extends BaseHOA {
   running: boolean = false;
 
   componentDidMount() {

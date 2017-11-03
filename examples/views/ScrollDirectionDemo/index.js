@@ -8,7 +8,7 @@ import {
   AnimatableView,
   Move,
   ScrollDirectionDriver,
-  ScrollDirectionAnimation,
+  WhileScrolling,
   type Animator,
 } from 'react-native-declan';
 
@@ -74,14 +74,14 @@ class ScrollDirectionDemo extends Component<any, Props, State> {
           }}
         />
 
-        <ScrollDirectionAnimation direction="either" driver={this.scrollDriver}>
+        <WhileScrolling direction="either" driver={this.scrollDriver}>
           <Move
             getTargetRef={this.getFab}
             y={100}
             duration={200}
             easing={Easing.in}
           />
-        </ScrollDirectionAnimation>
+        </WhileScrolling>
       </View>
     );
   }

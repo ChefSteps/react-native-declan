@@ -46,6 +46,8 @@ class BaseAnimator<D, P: any, S> extends Component<D, P, S>
     return this.props.initialValue;
   }
 
+  shouldUseNativeDriver = () => true;
+
   start() {
     // console.log(`Running ${this.id} to ${JSON.stringify(this.getDestinationValue())} with delay ${this.props.delay}`);
     this.value.stopAnimation();
@@ -55,8 +57,8 @@ class BaseAnimator<D, P: any, S> extends Component<D, P, S>
       duration: this.props.duration,
       delay: this.props.delay,
       easing: this.props.easing,
-      useNativeDriver: true,
-    }).start(() => this.props.onFinish && this.props.onFinish());
+      useNativeDriver: this.shouldUseNativeDriver(),
+    }).start(({finished}) => this.props.onFinish && this.props.onFinish({finished}));
   }
 
   stop() {
@@ -66,8 +68,8 @@ class BaseAnimator<D, P: any, S> extends Component<D, P, S>
       duration: this.props.durationBack || this.props.duration,
       delay: this.props.delayBack || this.props.delay,
       easing: this.props.easingBack || this.props.easing,
-      useNativeDriver: true,
-    }).start(() => this.props.onFinishBack && this.props.onFinishBack());
+      useNativeDriver: this.shouldUseNativeDriver(),
+    }).start(({finished}) => this.props.onFinishBack && this.props.onFinishBack({finished}));
   }
 
   render() {

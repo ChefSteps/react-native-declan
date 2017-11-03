@@ -7,17 +7,17 @@ import { Text, View, Easing, Button } from 'react-native';
 import {
   AnimatableView,
   Move,
-  Cycle,
+  Sequence,
   type Animator,
 } from 'react-native-declan';
 
 type State = {};
 type Props = {};
 
-class CycleDemo extends Component<any, Props, State> {
+class SequenceDemo extends Component<any, Props, State> {
   state: State;
   target: React.Element<*>;
-  cycle: Animator;
+  trigger: Animator;
 
   getTargetRef = () => this.target;
 
@@ -42,32 +42,32 @@ class CycleDemo extends Component<any, Props, State> {
 
         <Button
           onPress={() => {
-            this.cycle.reset();
-            this.cycle.start();
+            // this.trigger.reset();
+            this.trigger.start();
           }}
           title="Start"
         />
         <Button
           onPress={() => {
-            this.cycle.stop();
+            this.trigger.stop();
           }}
           title="Stop"
         />
 
-        <Cycle
+        <Sequence
           ref={ref => {
-            this.cycle = ref;
+            this.trigger = ref;
           }}
           getTargetRef={this.getTargetRef}
           duration={1000}
           easing={Easing.bounce}
         >
           <Move x={80} />
-          <Move x={-80} delay={1000} />
-        </Cycle>
+          <Move x={-80} />
+        </Sequence>
       </View>
     );
   }
 }
 
-export default CycleDemo;
+export default SequenceDemo;

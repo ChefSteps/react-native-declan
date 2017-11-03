@@ -64,7 +64,17 @@ Triggers actually cause change to happen. This is where we take the user's actio
 - Gesture-responsive triggers - animators that play in response to, and in proportion to, some user gesture
 
 #### Supported triggers
-[Insert table of triggers, description, usage.]
+
+| Name | Props | Description | Notes |
+| ---- | -------- | ---- | --------- |
+| `ManualTrigger` | - | A wrapper for a set of `Animator`s that you can trigger by calling `.start()` | - |
+| `Mounted` | - | Triggers its `Animator`s when this trigger is mounted | Put this at the bottom of the component tree to ensure it mounts last |
+| `WhileTrue` | `value`: boolean | Triggers its `Animator`s when `value` evaluates to true, stops the `Animator`s when false | - |
+| `ScrollPositionAnimation` | `from`: number, `to`: number, `driver`: `ScrollDriver` | Gesture-based trigger that plays its `Animator`s forward when `ScrollView` is scrolled from `from` to `to` | See [Scroll Position Demo](https://github.com/ChefSteps/react-native-declan/blob/master/examples/views/ScrollPositionDemo/index.js) for an example of how to hook it up to the `ScrollView` |
+| `WhileScrolling` | `direction`: `up`, `down`, or `either`, `driver`: `ScrollDriver` | Plays forward when associated `ScrollView` is scrolling in `direction`, otherwise plays backward | See [Scroll Direction Demo](https://github.com/ChefSteps/react-native-declan/blob/master/examples/views/ScrollDirectionDemo/index.js) for an example of how to hook it up to the `ScrollView` |
+| `StateGroup` | `defaultState`: string | This is a sort of wrapper Trigger for `State` | Trigger a specific state by calling `goToState` on this component's ref |
+| `State` | `name`: string | Will trigger its `Animator`s when parent `StateGroup` changes to this state, and play backward when changed away from this state | - |
+
 
 ### Components
 

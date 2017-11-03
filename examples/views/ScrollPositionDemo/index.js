@@ -10,6 +10,7 @@ import {
   ScrollPositionAnimation,
   Move,
   Fade,
+  Change,
   type Animator,
 } from 'react-native-declan';
 
@@ -79,6 +80,12 @@ class ScrollAnimationDemo extends Component<any, Props, State> {
         <ScrollPositionAnimation from={0} to={200} driver={this.scrollDriver}>
           <Fade getTargetRef={this.getProfile} initialValue={1} value={0} />
           <Move getTargetRef={this.getProfile} y={-100} />
+          <Change
+            getTargetRef={this.getProfile}
+            field="backgroundColor"
+            initialValue="lightblue"
+            value="rgb(255,0,0)"
+          />
         </ScrollPositionAnimation>
       </View>
     );

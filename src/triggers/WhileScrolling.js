@@ -12,7 +12,7 @@ type Props = {
   driver: ScrollDirectionDriver,
 };
 
-class ScrollDirectionAnimation extends ManualTrigger {
+class WhileScrolling extends ManualTrigger {
   constructor(props: Props) {
     super();
     this.animators = [];
@@ -40,4 +40,4 @@ class ScrollDirectionAnimation extends ManualTrigger {
   driver: ScrollDirectionDriver;
 }
 
-export default ScrollDirectionAnimation;
+export default WhileScrolling;

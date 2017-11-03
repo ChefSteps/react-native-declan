@@ -7,6 +7,8 @@ import CycleDemo from './views/CycleDemo';
 import ScrollPositionDemo from './views/ScrollPositionDemo';
 import ScrollDirectionDemo from './views/ScrollDirectionDemo';
 import StateGroupDemo from './views/StateGroupDemo';
+import SequenceDemo from './views/SequenceDemo';
+import StaggerDemo from './views/StaggerDemo';
 
 const HomeScreen = ({navigation}) => (
   <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -29,6 +31,14 @@ const HomeScreen = ({navigation}) => (
     <Button
       onPress={() => navigation.navigate('StateGroupDemo')}
       title="State Group"
+    />
+    <Button
+      onPress={() => navigation.navigate('SequenceDemo')}
+      title="Sequence"
+    />
+    <Button
+      onPress={() => navigation.navigate('StaggerDemo')}
+      title="Stagger"
     />
   </View>
 );
@@ -68,6 +78,18 @@ const RootNavigator = StackNavigator({
     screen: StateGroupDemo,
     navigationOptions: {
       headerTitle: 'State Group Demo',
+    },
+  },
+  SequenceDemo: {
+    screen: SequenceDemo,
+    navigationOptions: {
+      headerTitle: 'Sequence Demo',
+    },
+  },
+  StaggerDemo: {
+    screen: StaggerDemo,
+    navigationOptions: {
+      headerTitle: 'Stagger Demo',
     },
   },
 });

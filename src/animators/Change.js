@@ -36,14 +36,9 @@ class Change extends BaseAnimator<any, Props, State> {
 
   getAnimationTransformation = () => {
     if (!isNil(this.driverValue)) {
-      const driver = new Animated.Value(0);
-      this.driverValue.addListener(({ value }) => {
-        driver.setValue(value);
-      });
-
       return {
         [this.props.field]: this.driverValue.interpolate({
-          inputRange: this.driverInputRange,
+          inputRange: [0, 1],
           outputRange: [this.props.initialValue, this.props.value],
           extrapolate: 'clamp',
         })

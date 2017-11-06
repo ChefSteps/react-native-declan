@@ -2,12 +2,12 @@
 
 import { Animated } from 'react-native';
 import BaseTrigger from './BaseTrigger';
-import ScrollPositionDriver from '../drivers/ScrollPositionDriver';
+import ScrollDriver from '../drivers/ScrollDriver';
 
 type Props = {
   from: number,
   to: number,
-  driver: ScrollPositionDriver,
+  driver: ScrollDriver,
 };
 
 class ScrollingAnimation extends BaseTrigger {
@@ -18,14 +18,16 @@ class ScrollingAnimation extends BaseTrigger {
     this.to = props.to;
     this.driver = props.driver;
     this.propertiesToAppend = {
-      driverValue: this.driver.value,
-      driverInputRange: [this.from, this.to],
+      driverValue: this.driver.value.interpolate({
+        inputRange: [this.from, this.to],
+        outputRange: [0, 1],
+      })
     };
   }
 
   from: number;
   to: number;
-  driver: ScrollPositionDriver;
+  driver: ScrollDriver;
   interpolated: Animated.Interpolation;
   propertiesToAppend: Object;
 }

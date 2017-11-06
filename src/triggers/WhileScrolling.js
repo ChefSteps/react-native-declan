@@ -1,15 +1,15 @@
 // @flow
 
 import ManualTrigger from './ManualTrigger';
-import ScrollDirectionDriver, {
+import ScrollDriver, {
   type ScrollDirection,
-} from '../drivers/ScrollDirectionDriver';
+} from '../drivers/ScrollDriver';
 
 type Direction = 'up' | 'down' | 'either';
 
 type Props = {
   direction: Direction,
-  driver: ScrollDirectionDriver,
+  driver: ScrollDriver,
 };
 
 class WhileScrolling extends ManualTrigger {
@@ -37,7 +37,7 @@ class WhileScrolling extends ManualTrigger {
   }
 
   direction: Direction;
-  driver: ScrollDirectionDriver;
+  driver: ScrollDriver;
 }
 
 export default WhileScrolling;

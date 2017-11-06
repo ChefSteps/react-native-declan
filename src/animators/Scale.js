@@ -36,12 +36,6 @@ class Scale extends BaseAnimator<any, Props, State> {
 
   getAnimationTransformation = () => {
     if (!isNil(this.driverValue)) {
-      const driver = new Animated.Value(0);
-      this.driverValue.addListener(({ value }) => {
-        // console.log('SCALE driver updated to: ' + value);
-        driver.setValue(value);
-      });
-
       const initial: { x: number, y: number } = this.getInitialValue();
       const destination: { x: number, y: number } = this.getDestinationValue();
       const outputRange: { x: Array<number>, y: Array<number> } = {
@@ -52,15 +46,15 @@ class Scale extends BaseAnimator<any, Props, State> {
       return {
         transform: [
           {
-            scaleX: driver.interpolate({
-              inputRange: this.driverInputRange,
+            scaleX: this.driverValue.interpolate({
+              inputRange: [0, 1],
               outputRange: outputRange.x,
               extrapolate: 'clamp',
             }),
           },
           {
-            scaleY: driver.interpolate({
-              inputRange: this.driverInputRange,
+            scaleY: this.driverValue.interpolate({
+              inputRange: [0, 1],
               outputRange: outputRange.y,
               extrapolate: 'clamp',
             }),

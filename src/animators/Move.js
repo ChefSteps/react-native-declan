@@ -36,11 +36,6 @@ class Move extends BaseAnimator<any, Props, State> {
 
   getAnimationTransformation = () => {
     if (!isNil(this.driverValue)) {
-      const driver = new Animated.Value(0);
-      this.driverValue.addListener(({ value }) => {
-        driver.setValue(value);
-      });
-
       const initial : { x: number, y: number } = this.getInitialValue();
       const destination: { x: number, y: number } = this.getDestinationValue();
       const outputRange : { x: Array<number>, y: Array<number> }= {
@@ -52,14 +47,14 @@ class Move extends BaseAnimator<any, Props, State> {
         transform: [
           {
             translateX: this.driverValue.interpolate({
-              inputRange: this.driverInputRange,
+              inputRange: [0, 1],
               outputRange: outputRange.x,
               extrapolate: 'clamp',
             }),
           },
           {
             translateY: this.driverValue.interpolate({
-              inputRange: this.driverInputRange,
+              inputRange: [0, 1],
               outputRange: outputRange.y,
               extrapolate: 'clamp',
             }),

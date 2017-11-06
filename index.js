@@ -18,8 +18,7 @@ export Stagger from './src/higher-order-animators/Stagger';
 export AnimatableView from './src/components/AnimatableView';
 
 // Drivers
-export ScrollDirectionDriver from './src/drivers/ScrollDirectionDriver';
-export ScrollPositionDriver from './src/drivers/ScrollPositionDriver';
+export ScrollDriver from './src/drivers/ScrollDriver';
 
 // Triggers
 export BaseTrigger from './src/triggers/BaseTrigger';

@@ -42,11 +42,6 @@ class Rotate extends BaseAnimator<any, Props, State> {
     if (this.props.degreesY) field = 'rotateY';
 
     if (!isNil(this.driverValue)) {
-      const driver = new Animated.Value(0);
-      this.driverValue.addListener(({ value }) => {
-        driver.setValue(value);
-      });
-
       const initial : number = this.getInitialValue();
       const destination: number = this.getDestinationValue();
 
@@ -54,7 +49,7 @@ class Rotate extends BaseAnimator<any, Props, State> {
         transform: [
           {
             [field]: this.driverValue.interpolate({
-              inputRange: this.driverInputRange,
+              inputRange: [0, 1],
               outputRange: [initial, destination],
               extrapolate: 'clamp',
             }).interpolate({

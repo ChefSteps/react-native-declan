@@ -35,17 +35,12 @@ class Fade extends BaseAnimator<any, Props, State> {
 
   getAnimationTransformation = () => {
     if (!isNil(this.driverValue)) {
-      const driver = new Animated.Value(0);
-      this.driverValue.addListener(({ value }) => {
-        driver.setValue(value);
-      });
-
       const initial : number = this.getInitialValue();
       const destination: number = this.getDestinationValue();
 
       return {
         opacity: this.driverValue.interpolate({
-          inputRange: this.driverInputRange,
+          inputRange: [0, 1],
           outputRange: [initial, destination],
           extrapolate: 'clamp',
         })

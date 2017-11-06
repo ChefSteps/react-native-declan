@@ -28,7 +28,6 @@ class ScrollPositionAnimation extends BaseTrigger {
   from: number;
   to: number;
   driver: ScrollDriver;
-  interpolated: Animated.Interpolation;
   propertiesToAppend: Object;
 }
 

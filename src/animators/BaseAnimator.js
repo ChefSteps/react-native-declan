@@ -26,7 +26,7 @@ class BaseAnimator<D, P: any, S> extends Component<D, P, S>
     this.id = uuid.v4();
     this.progress = new Animated.Value(0);
     if (props.driverValue) {
-      this.progress = Object.create(props.driverValue);
+      this.progress = props.driverValue;
     }
   }
 

@@ -47,7 +47,6 @@ class BaseAnimator<D, P: any, S> extends Component<D, P, S>
   start() {
     this.progress.stopAnimation();
     Animated.timing(this.progress, {
-      // $FlowFixMe
       toValue: 1,
       duration: this.props.duration,
       delay: this.props.delay,

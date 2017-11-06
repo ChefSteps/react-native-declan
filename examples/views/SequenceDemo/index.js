@@ -42,7 +42,7 @@ class SequenceDemo extends Component<any, Props, State> {
 
         <Button
           onPress={() => {
-            // this.trigger.reset();
+            this.trigger.reset();
             this.trigger.start();
           }}
           title="Start"

@@ -6,7 +6,7 @@ import _ from 'lodash';
 
 import {
   AnimatableView,
-  ScrollPositionDriver,
+  ScrollDriver,
   ScrollPositionAnimation,
   Move,
   Fade,
@@ -19,12 +19,12 @@ type Props = {};
 
 class ScrollAnimationDemo extends Component<any, Props, State> {
   state: State;
-  scrollDriver: ScrollPositionDriver;
+  scrollDriver: ScrollDriver;
   profile: React.Element<*>;
 
   constructor(props: Props) {
     super(props);
-    this.scrollDriver = new ScrollPositionDriver();
+    this.scrollDriver = new ScrollDriver();
   }
 
   getProfile = () => this.profile;

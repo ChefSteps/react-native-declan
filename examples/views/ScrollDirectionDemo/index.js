@@ -7,7 +7,7 @@ import _ from 'lodash';
 import {
   AnimatableView,
   Move,
-  ScrollDirectionDriver,
+  ScrollDriver,
   WhileScrolling,
   type Animator,
 } from 'react-native-declan';
@@ -17,12 +17,12 @@ type Props = {};
 
 class ScrollDirectionDemo extends Component<any, Props, State> {
   state: State;
-  scrollDriver: ScrollDirectionDriver;
+  scrollDriver: ScrollDriver;
   fab: React.Element<*>;
 
   constructor(props: Props) {
     super(props);
-    this.scrollDriver = new ScrollDirectionDriver();
+    this.scrollDriver = new ScrollDriver();
   }
 
   getFab = () => this.fab;

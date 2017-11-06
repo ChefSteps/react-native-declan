@@ -20,45 +20,20 @@ type Props = {
 
 class Change extends BaseAnimator<any, Props, State> {
 
-  // $FlowFixMe
-  value: Animated.Value;
-  // $FlowFixMe
-  driverValue: Animated.Value;
   state = {};
 
-  constructor(props: Props) {
-    super(props);
-    this.value = new Animated.Value(this.getInitialValue());
-    this.reset();
-  }
-
-  reset = () => {
-    this.value.setValue(this.getInitialValue());
-  }
-
   getAnimationTransformation = () => {
-    if (!isNil(this.driverValue)) {
-      return {
-        [this.props.field]: this.driverValue.interpolate({
-          inputRange: [0, 1],
-          outputRange: [this.props.initialValue, this.props.value],
-          extrapolate: this.props.extrapolate,
-          extrapolateLeft: this.props.extrapolateLeft,
-          extrapolateRight: this.props.extrapolateRight,
-        })
-      };
-    }
-
     return {
-      [this.props.field]: this.value.interpolate({
-        inputRange: [0,1],
+      [this.props.field]: this.progress.interpolate({
+        inputRange: [0, 1],
         outputRange: [this.props.initialValue, this.props.value],
+        extrapolate: this.props.extrapolate,
+        extrapolateLeft: this.props.extrapolateLeft,
+        extrapolateRight: this.props.extrapolateRight,
       })
     };
   };
 
-  getDestinationValue = () => 1;
-  getInitialValue = () => 0;
   shouldUseNativeDriver = () => false;
 }
 

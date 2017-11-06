@@ -19,43 +19,21 @@ type Props = {
 
 class Fade extends BaseAnimator<any, Props, State> {
 
-  // $FlowFixMe
-  value: Animated.ValueXY;
-  // $FlowFixMe
-  driverValue: Animated.Value;
   state: {};
 
-  constructor(props: Props) {
-    super(props);
-    this.value = new Animated.Value(this.getInitialValue());
-    this.reset();
-  }
-
-  reset = () => {
-    this.value.setValue(this.getInitialValue());
-  }
-
   getAnimationTransformation = () => {
-    if (!isNil(this.driverValue)) {
-      const initial : number = this.getInitialValue();
-      const destination: number = this.getDestinationValue();
-
-      return {
-        opacity: this.driverValue.interpolate({
-          inputRange: [0, 1],
-          outputRange: [initial, destination],
-          extrapolate: this.props.extrapolate,
-          extrapolateLeft: this.props.extrapolateLeft,
-          extrapolateRight: this.props.extrapolateRight,
-        })
-      };
-    }
+    const initial : number = this.props.initialValue;
+    const destination: number = this.props.value;
     return {
-      opacity: this.value,
+      opacity: this.progress.interpolate({
+        inputRange: [0, 1],
+        outputRange: [initial, destination],
+        extrapolate: this.props.extrapolate,
+        extrapolateLeft: this.props.extrapolateLeft,
+        extrapolateRight: this.props.extrapolateRight,
+      })
     };
   }
-
-  getDestinationValue = () => this.props.value;
 }
 
 Fade.defaultProps = {

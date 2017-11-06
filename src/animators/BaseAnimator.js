@@ -13,22 +13,20 @@ class BaseAnimator<D, P: any, S> extends Component<D, P, S>
 
   state: $Abstract<S>;
 
-  getDestinationValue: $Abstract<() => any>;
   getAnimationTransformation: $Abstract<() => Object>;
-  reset: $Abstract<() => void>;
 
   id: string;
   target: ?AnimatableView;
-  value: AnimatedValue;
-  driverValue: ?AnimatedValue;
+  progress: AnimatedValue;
 
   props: P;
 
   constructor(props: P) {
     super(props);
     this.id = uuid.v4();
+    this.progress = new Animated.Value(0);
     if (props.driverValue) {
-      this.driverValue = Object.create(props.driverValue);
+      this.progress = Object.create(props.driverValue);
     }
   }
 
@@ -40,17 +38,17 @@ class BaseAnimator<D, P: any, S> extends Component<D, P, S>
     );
   }
 
-  getInitialValue() {
-    return this.props.initialValue;
+  reset = () => {
+    this.progress.setValue(0);
   }
 
   shouldUseNativeDriver = () => true;
 
   start() {
-    this.value.stopAnimation();
-    Animated.timing(this.value, {
+    this.progress.stopAnimation();
+    Animated.timing(this.progress, {
       // $FlowFixMe
-      toValue: this.getDestinationValue(),
+      toValue: 1,
       duration: this.props.duration,
       delay: this.props.delay,
       easing: this.props.easing,
@@ -59,9 +57,9 @@ class BaseAnimator<D, P: any, S> extends Component<D, P, S>
   }
 
   stop() {
-    this.value.stopAnimation();
-    Animated.timing(this.value, {
-      toValue: this.getInitialValue(),
+    this.progress.stopAnimation();
+    Animated.timing(this.progress, {
+      toValue: 0,
       duration: this.props.durationBack || this.props.duration,
       delay: this.props.delayBack || this.props.delay,
       easing: this.props.easingBack || this.props.easing,

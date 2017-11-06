@@ -22,57 +22,31 @@ type Props = {
 
 class Rotate extends BaseAnimator<any, Props, State> {
 
-  // $FlowFixMe
-  value: Animated.Value;
-  // $FlowFixMe
-  driverValue: Animated.Value;
   state: State;
-
-  constructor(props: Props) {
-    super(props);
-    this.value = new Animated.Value(this.getInitialValue());
-    this.reset();
-  }
-
-  reset = () => {
-    this.value.setValue(this.getInitialValue());
-  }
 
   getAnimationTransformation = () => {
     let field = 'rotate';
     if (this.props.degreesX) field = 'rotateX';
     if (this.props.degreesY) field = 'rotateY';
 
-    if (!isNil(this.driverValue)) {
-      const initial : number = this.getInitialValue();
-      const destination: number = this.getDestinationValue();
+    const initial : number = this.props.initialValue;
+    const destination: number = this.getDestinationValue();
 
-      return {
-        transform: [
-          {
-            [field]: this.driverValue.interpolate({
-              inputRange: [0, 1],
-              outputRange: [initial, destination],
-              extrapolate: this.props.extrapolate,
-              extrapolateLeft: this.props.extrapolateLeft,
-              extrapolateRight: this.props.extrapolateRight,
-            }).interpolate({
-              inputRange: [0, 360],
-              outputRange: ['0deg', '360deg'],
-              extrapolate: this.props.extrapolate,
-              extrapolateLeft: this.props.extrapolateLeft,
-              extrapolateRight: this.props.extrapolateRight,
-            }),
-          },
-        ],
-      };
-    }
     return {
       transform: [
         {
-          [field]: this.value.interpolate({
+          [field]: this.progress.interpolate({
+            inputRange: [0, 1],
+            outputRange: [initial, destination],
+            extrapolate: this.props.extrapolate,
+            extrapolateLeft: this.props.extrapolateLeft,
+            extrapolateRight: this.props.extrapolateRight,
+          }).interpolate({
             inputRange: [0, 360],
             outputRange: ['0deg', '360deg'],
+            extrapolate: this.props.extrapolate,
+            extrapolateLeft: this.props.extrapolateLeft,
+            extrapolateRight: this.props.extrapolateRight,
           }),
         },
       ],

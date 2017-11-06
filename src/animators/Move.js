@@ -20,62 +20,35 @@ type Props = {
 
 class Move extends BaseAnimator<any, Props, State> {
 
-  // $FlowFixMe
-  value: Animated.ValueXY;
-  // $FlowFixMe
-  driverValue: Animated.Value;
   state = {};
 
-  constructor(props: Props) {
-    super(props);
-    this.value = new Animated.ValueXY();
-    this.reset();
-  }
-
-  reset = () => {
-    this.value.setValue(this.getInitialValue());
-  }
-
   getAnimationTransformation = () => {
-    if (!isNil(this.driverValue)) {
-      const initial : { x: number, y: number } = this.getInitialValue();
-      const destination: { x: number, y: number } = this.getDestinationValue();
-      const outputRange : { x: Array<number>, y: Array<number> }= {
-        x: [ initial.x, destination.x ],
-        y: [ initial.y, destination.y ],
-      };
-
-      return {
-        transform: [
-          {
-            translateX: this.driverValue.interpolate({
-              inputRange: [0, 1],
-              outputRange: outputRange.x,
-              extrapolate: this.props.extrapolate,
-              extrapolateLeft: this.props.extrapolateLeft,
-              extrapolateRight: this.props.extrapolateRight,
-            }),
-          },
-          {
-            translateY: this.driverValue.interpolate({
-              inputRange: [0, 1],
-              outputRange: outputRange.y,
-              extrapolate: this.props.extrapolate,
-              extrapolateLeft: this.props.extrapolateLeft,
-              extrapolateRight: this.props.extrapolateRight,
-            }),
-          },
-        ],
-      };
-    }
+    const initial : { x: number, y: number } = this.props.initialValue;
+    const destination: { x: number, y: number } = this.getDestinationValue();
+    const outputRange : { x: Array<number>, y: Array<number> }= {
+      x: [ initial.x, destination.x ],
+      y: [ initial.y, destination.y ],
+    };
 
     return {
       transform: [
         {
-          translateX: this.value.x,
+          translateX: this.progress.interpolate({
+            inputRange: [0, 1],
+            outputRange: outputRange.x,
+            extrapolate: this.props.extrapolate,
+            extrapolateLeft: this.props.extrapolateLeft,
+            extrapolateRight: this.props.extrapolateRight,
+          }),
         },
         {
-          translateY: this.value.y,
+          translateY: this.progress.interpolate({
+            inputRange: [0, 1],
+            outputRange: outputRange.y,
+            extrapolate: this.props.extrapolate,
+            extrapolateLeft: this.props.extrapolateLeft,
+            extrapolateRight: this.props.extrapolateRight,
+          }),
         },
       ],
     };

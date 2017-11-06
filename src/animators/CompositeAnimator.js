@@ -12,14 +12,11 @@ class CompositeAnimator<D, P, S> extends BaseAnimator<D, P, S> {
 
   controller: ?Animator;
 
-  getDestinationValue = () => null;
   getAnimationTransformation = () => ({});
-  constructAnimatedValue = () => new Animated.Value(0);
 
   start() {
     if (this.controller) {
       this.controller.reset();
-      // $FlowFixMe
       this.controller.start();
     }
   }

@@ -10,7 +10,7 @@ type Props = {
   driver: ScrollDriver,
 };
 
-class ScrollingAnimation extends BaseTrigger {
+class ScrollPositionAnimation extends BaseTrigger {
   constructor(props: Props) {
     super(props);
     this.animators = [];
@@ -32,4 +32,4 @@ class ScrollingAnimation extends BaseTrigger {
   propertiesToAppend: Object;
 }
 
-export default ScrollingAnimation;
+export default ScrollPositionAnimation;

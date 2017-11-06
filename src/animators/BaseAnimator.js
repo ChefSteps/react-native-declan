@@ -21,7 +21,6 @@ class BaseAnimator<D, P: any, S> extends Component<D, P, S>
   target: ?AnimatableView;
   value: AnimatedValue;
   driverValue: ?AnimatedValue;
-  driverInputRange: Array<number>;
 
   props: P;
 
@@ -31,7 +30,6 @@ class BaseAnimator<D, P: any, S> extends Component<D, P, S>
     if (props.driverValue) {
       this.driverValue = Object.create(props.driverValue);
     }
-    this.driverInputRange = props.driverInputRange;
   }
 
   componentDidMount() {
@@ -49,7 +47,6 @@ class BaseAnimator<D, P: any, S> extends Component<D, P, S>
   shouldUseNativeDriver = () => true;
 
   start() {
-    // console.log(`Running ${this.id} to ${JSON.stringify(this.getDestinationValue())} with delay ${this.props.delay}`);
     this.value.stopAnimation();
     Animated.timing(this.value, {
       // $FlowFixMe

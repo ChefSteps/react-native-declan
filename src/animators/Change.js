@@ -6,6 +6,7 @@ import BaseAnimator from './BaseAnimator';
 import type {
   BaseAnimatorProps,
   TimingAnimatorProps,
+  DriverAnimatorProps
 } from '../types';
 
 type State = {};
@@ -14,7 +15,8 @@ type Props = {
   field: string,
   value: any,
 } & BaseAnimatorProps &
-  TimingAnimatorProps;
+  TimingAnimatorProps &
+  DriverAnimatorProps;
 
 class Change extends BaseAnimator<any, Props, State> {
 
@@ -40,7 +42,9 @@ class Change extends BaseAnimator<any, Props, State> {
         [this.props.field]: this.driverValue.interpolate({
           inputRange: [0, 1],
           outputRange: [this.props.initialValue, this.props.value],
-          extrapolate: 'clamp',
+          extrapolate: this.props.extrapolate,
+          extrapolateLeft: this.props.extrapolateLeft,
+          extrapolateRight: this.props.extrapolateRight,
         })
       };
     }
@@ -62,6 +66,9 @@ Change.defaultProps = {
   duration: 100,
   delay: 0,
   easing: Easing.linear,
+  extrapolate: 'clamp',
+  extrapolateLeft: 'clamp',
+  extrapolateRight: 'clamp',
 };
 
 export default Change;

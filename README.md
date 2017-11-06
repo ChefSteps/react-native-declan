@@ -81,6 +81,9 @@ All of the above `Animator`s also take the following props:
 | `delayBack` | number | Delay before starting backward animation |
 | `easing` | `Easing` | [Easing](https://facebook.github.io/react-native/docs/easing.html) function to apply to forward animation |
 | `easingBack` | `Easing` | [Easing](https://facebook.github.io/react-native/docs/easing.html) function to apply to backward animation |
+| `extrapolate` | `'extend'` or `'clamp'` | Extrapolation setting for driver-based `Animator` |
+| `extrapolateLeft` | `'extend'` or `'clamp'` | Extrapolation setting for driver-based `Animator` |
+| `easingBack` | `'extend'` or `'clamp'` | Extrapolation setting for driver-based `Animator` |
 
 ### Triggers
 

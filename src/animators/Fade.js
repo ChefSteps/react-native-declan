@@ -6,6 +6,7 @@ import BaseAnimator from './BaseAnimator';
 import type {
   BaseAnimatorProps,
   TimingAnimatorProps,
+  DriverAnimatorProps,
 } from '../types';
 
 type State = {};
@@ -13,7 +14,8 @@ type State = {};
 type Props = {
   value: number,
 } & BaseAnimatorProps &
-  TimingAnimatorProps;
+  TimingAnimatorProps &
+  DriverAnimatorProps;
 
 class Fade extends BaseAnimator<any, Props, State> {
 
@@ -42,7 +44,9 @@ class Fade extends BaseAnimator<any, Props, State> {
         opacity: this.driverValue.interpolate({
           inputRange: [0, 1],
           outputRange: [initial, destination],
-          extrapolate: 'clamp',
+          extrapolate: this.props.extrapolate,
+          extrapolateLeft: this.props.extrapolateLeft,
+          extrapolateRight: this.props.extrapolateRight,
         })
       };
     }
@@ -60,6 +64,9 @@ Fade.defaultProps = {
   duration: 100,
   delay: 0,
   easing: Easing.linear,
+  extrapolate: 'clamp',
+  extrapolateLeft: 'clamp',
+  extrapolateRight: 'clamp',
 };
 
 export default Fade;

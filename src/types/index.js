@@ -30,6 +30,14 @@ export type TimingAnimatorProps = {
   easingBack?: typeof Easing.linear,
 };
 
+export type Extrapolation = 'extend' | 'clamp';
+
+export type DriverAnimatorProps = {
+  extrapolate: Extrapolation,
+  extrapolateLeft: Extrapolation,
+  extrapolateRight: Extrapolation,
+};
+
 export interface Driver {
   value: Animated.Value,
 }

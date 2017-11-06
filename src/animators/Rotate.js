@@ -6,6 +6,7 @@ import BaseAnimator from './BaseAnimator';
 import type {
   BaseAnimatorProps,
   TimingAnimatorProps,
+  DriverAnimatorProps
 } from '../types';
 
 type State = {};
@@ -16,7 +17,8 @@ type Props = {
   degreesY: number,
   degreesZ: number,
 } & BaseAnimatorProps &
-  TimingAnimatorProps;
+  TimingAnimatorProps &
+  DriverAnimatorProps;
 
 class Rotate extends BaseAnimator<any, Props, State> {
 
@@ -51,10 +53,15 @@ class Rotate extends BaseAnimator<any, Props, State> {
             [field]: this.driverValue.interpolate({
               inputRange: [0, 1],
               outputRange: [initial, destination],
-              extrapolate: 'clamp',
+              extrapolate: this.props.extrapolate,
+              extrapolateLeft: this.props.extrapolateLeft,
+              extrapolateRight: this.props.extrapolateRight,
             }).interpolate({
               inputRange: [0, 360],
               outputRange: ['0deg', '360deg'],
+              extrapolate: this.props.extrapolate,
+              extrapolateLeft: this.props.extrapolateLeft,
+              extrapolateRight: this.props.extrapolateRight,
             }),
           },
         ],
@@ -88,6 +95,9 @@ Rotate.defaultProps = {
   duration: 100,
   delay: 0,
   easing: Easing.linear,
+  extrapolate: 'clamp',
+  extrapolateLeft: 'clamp',
+  extrapolateRight: 'clamp',
 };
 
 export default Rotate;

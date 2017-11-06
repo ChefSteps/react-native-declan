@@ -6,6 +6,7 @@ import BaseAnimator from './BaseAnimator';
 import type {
   BaseAnimatorProps,
   TimingAnimatorProps,
+  DriverAnimatorProps,
 } from '../types';
 
 type State = {};
@@ -15,7 +16,8 @@ type Props = {
   x: number,
   y: number,
 } & BaseAnimatorProps &
-  TimingAnimatorProps;
+  TimingAnimatorProps &
+  DriverAnimatorProps;
 
 class Scale extends BaseAnimator<any, Props, State> {
   // $FlowFixMe
@@ -49,14 +51,18 @@ class Scale extends BaseAnimator<any, Props, State> {
             scaleX: this.driverValue.interpolate({
               inputRange: [0, 1],
               outputRange: outputRange.x,
-              extrapolate: 'clamp',
+              extrapolate: this.props.extrapolate,
+              extrapolateLeft: this.props.extrapolateLeft,
+              extrapolateRight: this.props.extrapolateRight,
             }),
           },
           {
             scaleY: this.driverValue.interpolate({
               inputRange: [0, 1],
               outputRange: outputRange.y,
-              extrapolate: 'clamp',
+              extrapolate: this.props.extrapolate,
+              extrapolateLeft: this.props.extrapolateLeft,
+              extrapolateRight: this.props.extrapolateRight,
             }),
           },
         ],
@@ -89,6 +95,9 @@ Scale.defaultProps = {
   duration: 100,
   delay: 0,
   easing: Easing.linear,
+  extrapolate: 'clamp',
+  extrapolateLeft: 'clamp',
+  extrapolateRight: 'clamp',
 };
 
 export default Scale;

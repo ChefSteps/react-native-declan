@@ -54,27 +54,21 @@ export default class ScrollDriver implements Driver {
     },
   ) {
     this.onScrollViewLayout = this.onScrollViewLayout.bind(this);
-
     this.onScrollBegin = this.onScrollBegin.bind(this);
     this.onScrollEnd = this.onScrollEnd.bind(this);
 
     this.value = new Animated.Value(0);
-    this.nativeValue = new Animated.Value(0);
-    this.nativeValue.addListener(
-      _.debounce(({ value }) => {
-        if (this.scrolling) {
-          this.setDirection(value < this.currentPosition ? 'UP' : 'DOWN');
-        }
-        this.currentPosition = value;
-        this.value.setValue(value);
-      }),
-      options.nativeScrollEventThrottle,
-    );
+    this.value.addListener(({ value }) => {
+      if (this.scrolling) {
+        this.setDirection(value < this.currentPosition ? 'UP' : 'DOWN');
+      }
+      this.currentPosition = value;
+    });
     this.setDirection('NONE');
 
     this.scrollViewProps = {
       onScroll: Animated.event(
-        [{ nativeEvent: { contentOffset: { y: this.nativeValue } } }],
+        [{ nativeEvent: { contentOffset: { y: this.value } } }],
         { useNativeDriver: false },
       ),
       scrollEventThrottle: 1,
@@ -89,7 +83,6 @@ export default class ScrollDriver implements Driver {
   onScrollViewLayout: LayoutEvent => void;
   layout: Layout;
   value: Animated.Value;
-  nativeValue: Animated.Value;
   scrollViewProps: ScrollViewProps;
   onScrollBegin: () => void;
   onScrollEnd: () => void;

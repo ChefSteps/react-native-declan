@@ -43,7 +43,7 @@ class ScrollAnimationDemo extends Component<any, Props, State> {
             position: 'absolute',
             top: 40,
             left: Dimensions.get('window').width / 2 - 75,
-            backgroundColor: 'lightblue',
+            backgroundColor: '#ADD8E6',
             borderWidth: 3,
             borderColor: 'white',
           }}
@@ -83,8 +83,9 @@ class ScrollAnimationDemo extends Component<any, Props, State> {
           <Change
             getTargetRef={this.getProfile}
             field="backgroundColor"
-            initialValue="lightblue"
-            value="rgb(255,0,0)"
+            initialValue="#ADD8E6"
+            value="#D7E6AC"
+            extrapolateLeft="extend"
           />
         </ScrollPositionAnimation>
       </View>

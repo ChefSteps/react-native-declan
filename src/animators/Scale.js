@@ -12,7 +12,6 @@ import type {
 type State = {};
 
 type Props = {
-  factor: number,
   x: number,
   y: number,
 } & BaseAnimatorProps &
@@ -56,14 +55,13 @@ class Scale extends BaseAnimator<any, Props, State> {
   }
 
   getDestinationValue = () => ({
-    x: this.props.x || this.props.factor,
-    y: this.props.y || this.props.factor,
+    x: this.props.x,
+    y: this.props.y,
   });
 }
 
 Scale.defaultProps = {
   initialValue: { x: 1, y: 1 },
-  factor: 1,
   x: 1,
   y: 1,
   duration: 100,

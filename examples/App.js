@@ -10,6 +10,7 @@ import StateGroupDemo from './views/StateGroupDemo';
 import SequenceDemo from './views/SequenceDemo';
 import StaggerDemo from './views/StaggerDemo';
 import CameraDemo from './views/CameraDemo';
+import MeetupDemo from './views/MeetupDemo';
 
 const HomeScreen = ({navigation}) => (
   <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -44,6 +45,10 @@ const HomeScreen = ({navigation}) => (
     <Button
       onPress={() => navigation.navigate('CameraDemo')}
       title="Camera"
+    />
+    <Button
+      onPress={() => navigation.navigate('MeetupDemo')}
+      title="Meetup"
     />
   </View>
 );
@@ -103,6 +108,14 @@ const RootNavigator = StackNavigator({
       headerTitle: 'Camera Demo',
     },
   },
+  MeetupDemo: {
+    screen: MeetupDemo,
+    navigationOptions: {
+      header: null,
+    },
+  }
+}, {
+  headerMode: 'screen'
 });
 
 export default class App extends React.Component {

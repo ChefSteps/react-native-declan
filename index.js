@@ -1,3 +1,6 @@
+// Components
+export Declan from './src/components';
+
 // Animators
 export BaseAnimator from './src/animators/BaseAnimator';
 export CompositeAnimator from './src/animators/CompositeAnimator';
@@ -13,9 +16,6 @@ export Cycle from './src/higher-order-animators/Cycle';
 export Sequence from './src/higher-order-animators/Sequence';
 export Parallel from './src/higher-order-animators/Parallel';
 export Stagger from './src/higher-order-animators/Stagger';
-
-// Components
-export AnimatableView from './src/components/AnimatableView';
 
 // Drivers
 export ScrollDriver from './src/drivers/ScrollDriver';

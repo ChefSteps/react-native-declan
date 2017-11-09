@@ -5,43 +5,15 @@ import { StackNavigator } from 'react-navigation';
 import ShakeDemo from './views/ShakeDemo';
 import CycleDemo from './views/CycleDemo';
 import ScrollPositionDemo from './views/ScrollPositionDemo';
-import ScrollDirectionDemo from './views/ScrollDirectionDemo';
 import StateGroupDemo from './views/StateGroupDemo';
 import SequenceDemo from './views/SequenceDemo';
 import StaggerDemo from './views/StaggerDemo';
 import CameraDemo from './views/CameraDemo';
 import MeetupDemo from './views/MeetupDemo';
+import TinyBeansDemo from './views/TinyBeansDemo';
 
 const HomeScreen = ({navigation}) => (
   <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-    <Button
-      onPress={() => navigation.navigate('ShakeDemo')}
-      title="Shake"
-    />
-    <Button
-      onPress={() => navigation.navigate('CycleDemo')}
-      title="Cycle"
-    />
-    <Button
-      onPress={() => navigation.navigate('ScrollPositionDemo')}
-      title="Scroll Position Animation"
-    />
-    <Button
-      onPress={() => navigation.navigate('ScrollDirectionDemo')}
-      title="Scroll Direction Animation"
-    />
-    <Button
-      onPress={() => navigation.navigate('StateGroupDemo')}
-      title="State Group"
-    />
-    <Button
-      onPress={() => navigation.navigate('SequenceDemo')}
-      title="Sequence"
-    />
-    <Button
-      onPress={() => navigation.navigate('StaggerDemo')}
-      title="Stagger"
-    />
     <Button
       onPress={() => navigation.navigate('CameraDemo')}
       title="Camera"
@@ -49,6 +21,10 @@ const HomeScreen = ({navigation}) => (
     <Button
       onPress={() => navigation.navigate('MeetupDemo')}
       title="Meetup"
+    />
+    <Button
+      onPress={() => navigation.navigate('TinyBeansDemo')}
+      title="Tiny Beans"
     />
   </View>
 );
@@ -76,12 +52,6 @@ const RootNavigator = StackNavigator({
     screen: ScrollPositionDemo,
     navigationOptions: {
       headerTitle: 'Scroll Position Demo',
-    },
-  },
-  ScrollDirectionDemo: {
-    screen: ScrollDirectionDemo,
-    navigationOptions: {
-      headerTitle: 'Scroll Direction Demo',
     },
   },
   StateGroupDemo: {
@@ -113,7 +83,13 @@ const RootNavigator = StackNavigator({
     navigationOptions: {
       header: null,
     },
-  }
+  },
+  TinyBeansDemo: {
+    screen: TinyBeansDemo,
+    navigationOptions: {
+      headerTitle: 'Tiny Beans Demo',
+    },
+  },
 }, {
   headerMode: 'screen'
 });

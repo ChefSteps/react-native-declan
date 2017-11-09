@@ -5,7 +5,7 @@ import { View, ScrollView, Dimensions, Easing } from 'react-native';
 import _ from 'lodash';
 
 import {
-  AnimatableView,
+  Declan,
   Move,
   ScrollDriver,
   WhileScrolling,
@@ -57,7 +57,7 @@ class ScrollDirectionDemo extends Component<any, Props, State> {
           </ScrollView>
         </View>
 
-        <AnimatableView
+        <Declan.View
           ref={ref => {
             this.fab = ref;
           }}

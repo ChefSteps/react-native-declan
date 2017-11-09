@@ -146,7 +146,7 @@ class MeetupDemo extends Component<any, Props, ComponentState> {
             ref={ref => { this.backChevron = ref; }}
             style={styles.backChevron}
           >
-            BACK
+            Back
           </Declan.Text>
         </Declan.View>
 
@@ -161,7 +161,7 @@ class MeetupDemo extends Component<any, Props, ComponentState> {
             getTargetRef={() => this.backChevron}
             field="color"
             initialValue="white"
-            value="black"
+            value="red"
           />
         </ScrollPositionAnimation>
 

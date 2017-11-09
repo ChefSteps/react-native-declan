@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import { View, Easing, Button } from 'react-native';
 
 import {
-  AnimatableView,
+  Declan,
   Move,
   StateGroup,
   State,
@@ -26,7 +26,7 @@ class StateGroupDemo extends Component<any, Props, ComponentState> {
   render() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', 'alignItems': 'center' }}>
-          <AnimatableView
+          <Declan.View
             ref={ref => {
               this.target = ref;
             }}

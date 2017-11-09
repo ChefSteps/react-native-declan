@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import { View, Button } from 'react-native';
 
 import {
-  AnimatableView,
+  Declan,
   Shake,
   type Animator,
 } from 'react-native-declan';
@@ -23,7 +23,7 @@ class ShakeDemo extends Component<any, Props, State> {
   render() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <AnimatableView
+        <Declan.View
           ref={ref => {
             this.toShake = ref;
           }}

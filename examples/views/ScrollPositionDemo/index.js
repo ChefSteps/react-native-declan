@@ -5,7 +5,7 @@ import { View, ScrollView, Dimensions } from 'react-native';
 import _ from 'lodash';
 
 import {
-  AnimatableView,
+  Declan,
   ScrollDriver,
   ScrollPositionAnimation,
   Move,
@@ -32,7 +32,7 @@ class ScrollAnimationDemo extends Component<any, Props, State> {
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center' }}>
-        <AnimatableView
+        <Declan.View
           ref={ref => {
             this.profile = ref;
           }}

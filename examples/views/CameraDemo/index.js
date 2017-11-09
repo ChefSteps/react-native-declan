@@ -13,7 +13,7 @@ import {
 import { Font } from 'expo';
 
 import {
-  AnimatableView,
+  Declan,
   Move,
   Fade,
   Scale,
@@ -122,7 +122,7 @@ class CameraDemo extends Component<any, Props, ComponentState> {
 
     return (
       <View style={styles.page}>
-        <AnimatableView
+        <Declan.View
           ref={ref => (this.modes = ref)}
           style={styles.modesContainer}
         >
@@ -138,35 +138,35 @@ class CameraDemo extends Component<any, Props, ComponentState> {
             this.setState({ recording: false });
             this.stateGroup && this.stateGroup.goToState('slomo');
           })}
-        </AnimatableView>
+        </Declan.View>
 
         <View style={styles.buttonContainer}>
-          <AnimatableView
+          <Declan.View
             ref={ref => (this.outlineVideo = ref)}
             style={styles.buttonOutline}
           >
             <Image source={require('./assets/filled.png')} />
-          </AnimatableView>
+          </Declan.View>
 
-          <AnimatableView
+          <Declan.View
             ref={ref => (this.outlineSlomo = ref)}
             style={styles.buttonOutline}
           >
             <Image source={require('./assets/slo-mo.png')} />
-          </AnimatableView>
+          </Declan.View>
 
-          <AnimatableView
+          <Declan.View
             ref={ref => (this.outlineTimelapse = ref)}
             style={styles.buttonOutline}
           >
             <Image source={require('./assets/time-lapse.png')} />
-          </AnimatableView>
+          </Declan.View>
 
-          <AnimatableView
+          <Declan.View
             ref={ref => (this.centerContainer = ref)}
             style={styles.centerContainer}
           >
-            <AnimatableView
+            <Declan.View
               ref={ref => (this.center = ref)}
               style={styles.buttonCenter}
             >
@@ -177,8 +177,8 @@ class CameraDemo extends Component<any, Props, ComponentState> {
               >
                 <View style={styles.buttonTouchable} />
               </TouchableWithoutFeedback>
-            </AnimatableView>
-          </AnimatableView>
+            </Declan.View>
+          </Declan.View>
         </View>
 
         <StateGroup

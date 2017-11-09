@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import { Text, View, Easing, Button } from 'react-native';
 
 import {
-  AnimatableView,
+  Declan,
   Move,
   Cycle,
   type Animator,
@@ -24,7 +24,7 @@ class CycleDemo extends Component<any, Props, State> {
   render() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <AnimatableView
+        <Declan.View
           ref={ref => {
             this.target = ref;
           }}

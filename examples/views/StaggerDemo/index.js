@@ -31,7 +31,7 @@ const rawStyles = {
 };
 
 import {
-  AnimatableView,
+  Declan,
   Move,
   Stagger,
   type Animator,
@@ -55,19 +55,19 @@ class StaggerDemo extends Component<any, Props, State> {
       <View style={styles.page}>
 
         <View style={styles.balls}>
-          <AnimatableView
+          <Declan.View
             ref={ref => { this.ref1 = ref; }}
             style={rawStyles.ball}
           />
-          <AnimatableView
+          <Declan.View
             ref={ref => { this.ref2 = ref; }}
             style={rawStyles.ball}
           />
-          <AnimatableView
+          <Declan.View
             ref={ref => { this.ref3 = ref; }}
             style={rawStyles.ball}
           />
-          <AnimatableView
+          <Declan.View
             ref={ref => { this.ref4 = ref; }}
             style={rawStyles.ball}
           />

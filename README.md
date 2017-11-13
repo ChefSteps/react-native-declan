@@ -10,11 +10,12 @@ Declan is a library that makes it easy to incorporate declarative animations and
 ## Demos
 
 <p align="center">
-  <img src="https://github.com/ChefSteps/react-native-declan/blob/master/assets/camera_demo.gif?raw=true" width="240" />
-  <img src="https://github.com/ChefSteps/react-native-declan/blob/master/assets/meetup_demo.gif?raw=true" width="240" />
+  <img src="assets/camera_demo.gif" width=250 />
+  <img src="assets/meetup_demo.gif" width=250 />
   <br />
-  <img src="https://github.com/ChefSteps/react-native-declan/blob/master/assets/tiny_beans_demo.gif?raw=true" width="240" />
-  <img src="https://github.com/ChefSteps/react-native-declan/blob/master/assets/swipe_demo.gif?raw=true" width="240" />
+  <br />
+  <img src="assets/tiny_beans_demo.gif" width=250 />
+  <img src="assets/swipe_demo.gif" width=250 />
 </p>
 
 ### Run the demo app on Expo

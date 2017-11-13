@@ -1,10 +1,22 @@
-# react-native-declan
+<h1 align="center">
+  <img width="400" src="./assets/react-native-declan-logo.png"/>
+  <br>
+  <br>
+  Declarative Animations for React Native
+</h1>
 
 Declan is a library that makes it easy to incorporate declarative animations and interactions into your React Native app. It's inspired heavily by the [UX](https://www.fusetools.com/docs/declarative-animation) language created by Fuse.
 
-## Demo
+## Demos
 
-[Insert gifs of some compelling demos here]
+<p align="center">
+  <img src="assets/camera_demo.gif" width=250 />
+  <img src="assets/meetup_demo.gif" width=250 />
+  <br />
+  <br />
+  <img src="assets/tiny_beans_demo.gif" width=250 />
+  <img src="assets/swipe_demo.gif" width=250 />
+</p>
 
 ### Run the demo app on Expo
 https://expo.io/@akalyan/examples

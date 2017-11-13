@@ -65,11 +65,11 @@ const styles = {
     opacity: 0.7,
     top: 0,
     left: Dimensions.get('window').width,
-  }
+  },
 };
 
 type State = {
-  menuOpen: boolean
+  menuOpen: boolean,
 };
 type Props = {};
 
@@ -111,7 +111,7 @@ class ScrollDirectionDemo extends Component<any, Props, State> {
         </Declan.View>
 
         <TouchableWithoutFeedback
-          onPress={() => this.setState({menuOpen: !this.state.menuOpen})}
+          onPress={() => this.setState({ menuOpen: !this.state.menuOpen })}
         >
           <Declan.Image
             ref={ref => {
@@ -122,7 +122,7 @@ class ScrollDirectionDemo extends Component<any, Props, State> {
           />
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback
-          onPress={() => this.setState({menuOpen: !this.state.menuOpen})}
+          onPress={() => this.setState({ menuOpen: !this.state.menuOpen })}
         >
           <Declan.Image
             ref={ref => {
@@ -133,7 +133,7 @@ class ScrollDirectionDemo extends Component<any, Props, State> {
           />
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback
-          onPress={() => this.setState({menuOpen: !this.state.menuOpen})}
+          onPress={() => this.setState({ menuOpen: !this.state.menuOpen })}
         >
           <Declan.Image
             ref={ref => {
@@ -144,7 +144,7 @@ class ScrollDirectionDemo extends Component<any, Props, State> {
           />
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback
-          onPress={() => this.setState({menuOpen: !this.state.menuOpen})}
+          onPress={() => this.setState({ menuOpen: !this.state.menuOpen })}
         >
           <Declan.Image
             ref={ref => {
@@ -156,7 +156,7 @@ class ScrollDirectionDemo extends Component<any, Props, State> {
         </TouchableWithoutFeedback>
 
         <TouchableWithoutFeedback
-          onPress={() => this.setState({menuOpen: !this.state.menuOpen})}
+          onPress={() => this.setState({ menuOpen: !this.state.menuOpen })}
         >
           <Declan.Image
             ref={ref => {
@@ -168,11 +168,7 @@ class ScrollDirectionDemo extends Component<any, Props, State> {
         </TouchableWithoutFeedback>
 
         <WhileScrolling direction="either" driver={this.scrollDriver}>
-          <Parallel
-            y={100}
-            duration={200}
-            easing={Easing.in}
-          >
+          <Parallel y={100} duration={200} easing={Easing.in}>
             <Move getTargetRef={() => this.buttons['plus']} />
             <Move getTargetRef={() => this.buttons['circle']} />
             <Move getTargetRef={() => this.buttons['square']} />
@@ -194,30 +190,26 @@ class ScrollDirectionDemo extends Component<any, Props, State> {
             duration={100}
             easing={Easing.in}
           />
-          <Stagger
-            eachDelay={75}
-            duration={200}
-            easing={Easing.in}
-          >
+          <Stagger eachDelay={75} duration={150} easing={Easing.in}>
             <Move
               getTargetRef={() => this.buttons['circle']}
-              x={Math.cos(-(Math.PI/2)-(Math.PI/3))*100}
-              y={Math.sin(-(Math.PI/2)-(Math.PI/3))*100}
+              x={Math.cos(-(Math.PI / 2) - Math.PI / 3) * 100}
+              y={Math.sin(-(Math.PI / 2) - Math.PI / 3) * 100}
             />
             <Move
               getTargetRef={() => this.buttons['square']}
-              x={Math.cos(-(Math.PI/2)-(Math.PI/9))*100}
-              y={Math.sin(-(Math.PI/2)-(Math.PI/9))*100}
+              x={Math.cos(-(Math.PI / 2) - Math.PI / 9) * 100}
+              y={Math.sin(-(Math.PI / 2) - Math.PI / 9) * 100}
             />
             <Move
               getTargetRef={() => this.buttons['triangle']}
-              x={Math.cos(-(Math.PI/2)+(Math.PI/9))*100}
-              y={Math.sin(-(Math.PI/2)+(Math.PI/9))*100}
+              x={Math.cos(-(Math.PI / 2) + Math.PI / 9) * 100}
+              y={Math.sin(-(Math.PI / 2) + Math.PI / 9) * 100}
             />
             <Move
               getTargetRef={() => this.buttons['polygon']}
-              x={Math.cos(-(Math.PI/2)+(Math.PI/3))*100}
-              y={Math.sin(-(Math.PI/2)+(Math.PI/3))*100}
+              x={Math.cos(-(Math.PI / 2) + Math.PI / 3) * 100}
+              y={Math.sin(-(Math.PI / 2) + Math.PI / 3) * 100}
             />
           </Stagger>
         </WhileTrue>

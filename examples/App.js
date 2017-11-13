@@ -11,6 +11,7 @@ import StaggerDemo from './views/StaggerDemo';
 import CameraDemo from './views/CameraDemo';
 import MeetupDemo from './views/MeetupDemo';
 import TinyBeansDemo from './views/TinyBeansDemo';
+import SwipeDemo from './views/SwipeDemo';
 
 const HomeScreen = ({navigation}) => (
   <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -25,6 +26,10 @@ const HomeScreen = ({navigation}) => (
     <Button
       onPress={() => navigation.navigate('TinyBeansDemo')}
       title="Tiny Beans"
+    />
+    <Button
+      onPress={() => navigation.navigate('SwipeDemo')}
+      title="Swipe"
     />
   </View>
 );
@@ -90,6 +95,12 @@ const RootNavigator = StackNavigator({
       headerTitle: 'Tiny Beans Demo',
     },
   },
+  SwipeDemo: {
+      screen: SwipeDemo,
+      navigationOptions: {
+        headerTitle: 'Swipe Demo',
+      },
+    },
 }, {
   headerMode: 'screen'
 });

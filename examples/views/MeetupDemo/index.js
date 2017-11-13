@@ -30,7 +30,7 @@ const styles = {
     left: 0,
     width: '100%',
     height: 65,
-    backgroundColor: 'transparent',
+    backgroundColor: 'rgba(255, 255, 255, 0)',
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
@@ -154,8 +154,8 @@ class MeetupDemo extends Component<any, Props, ComponentState> {
           <Change
             getTargetRef={() => this.header}
             field="backgroundColor"
-            initialValue="transparent"
-            value="white"
+            initialValue="rgba(255,255,255,0)"
+            value="rgba(255,255,255,1)"
           />
           <Change
             getTargetRef={() => this.backChevron}

@@ -2,10 +2,12 @@
 
 import React, { Component } from 'react';
 import { Animated } from 'react-native';
-import { reduce, mergeDeepWithKey, concat } from 'ramda';
+import { values, reduce, mergeDeepWithKey, concat } from 'ramda';
 
 type State = {
-  styleTransformations: Object[],
+  styleTransformations: {
+    [string]: Object,
+  }
 };
 
 const concatTransforms = (k, l, r) => {
@@ -19,12 +21,12 @@ export default (WrappedComponent) => {
 
   return class DeclanComponent extends Component<any, any, State> {
     state: State = {
-      styleTransformations: [],
+      styleTransformations: {},
     };
 
-    registerAnimationTransformation(transformation: Object) {
+    registerAnimationTransformation(id: string, transformation: Object) {
       const newTransformations = this.state.styleTransformations;
-      newTransformations.push(transformation);
+      newTransformations[id] = transformation;
       this.setState({
         styleTransformations: newTransformations,
       });
@@ -37,7 +39,7 @@ export default (WrappedComponent) => {
           {...this.props}
           style={reduce(mergeDeepWithKey(concatTransforms), {}, [
             style,
-            ...this.state.styleTransformations,
+            ...(values(this.state.styleTransformations)),
           ])}
         >
           {this.props.children}

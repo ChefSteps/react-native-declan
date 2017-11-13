@@ -3,26 +3,9 @@
 /* This borrows heavily from the shoutem/animation library */
 
 import { Animated } from 'react-native';
-import _ from 'lodash';
 import EventEmitter from 'eventemitter3';
 
-import { Driver } from '../types';
-
-type Options = {
-  useNativeDriver?: boolean,
-  nativeScrollEventThrottle: number,
-};
-
-type Layout = {
-  x: number,
-  y: number,
-  width: number,
-  height: number,
-};
-
-type LayoutEvent = {
-  nativeEvent: { layout: Layout },
-};
+import { Driver, Layout, LayoutEvent } from '../types';
 
 type ScrollViewProps = {
   onScroll: Animated.event,
@@ -36,23 +19,13 @@ type ScrollViewProps = {
 
 export type ScrollDirection = 'UP' | 'DOWN' | 'NONE';
 
-/*
- * @param options Driver options
- * @param options.nativeScrollEventThrottle Native animated value changes
- *   will be debounced using this value when mirroring them to the JS value.
- *   Defaults to 20ms.
- */
 export default class ScrollDriver implements Driver {
   scrolling: boolean = false;
   currentPosition: number = 0;
   scrollDirection: ScrollDirection;
   scrollDirectionEmitter: EventEmitter = new EventEmitter();
 
-  constructor(
-    options: Options = {
-      nativeScrollEventThrottle: 20,
-    },
-  ) {
+  constructor() {
     this.onScrollViewLayout = this.onScrollViewLayout.bind(this);
     this.onScrollBegin = this.onScrollBegin.bind(this);
     this.onScrollEnd = this.onScrollEnd.bind(this);

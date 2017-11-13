@@ -29,11 +29,12 @@ or
 
 We suggest reading the Fuse [documentation for Animations](https://www.fusetools.com/docs/declarative-animation) to get a better sense for what react-native-declan strives to be and how to implement compelling user interactions with a truly declarative API. In lieu of that, here is a summary.
 
-There are three main entities that react-native-declan comprises:
+There are several entities that react-native-declan comprises:
 - `Animator`s - descriptions of how components change
 - `Trigger`s - stimuli that invoke change, wrap a set of `Animator`s
 - Higher-Order `Animator`s - like the offspring of `Animator` and `Trigger`, wrap and invoke a set of `Animator`s, but also behave like an `Animator`
 - `Components` - what will change
+- `Behaviors` - give `Component`s capabilities or detects gestures that are used by `Trigger`s
 
 ### Animators
 
@@ -66,8 +67,10 @@ The above snippet describes a movement of the component referenced by `elementTo
 | `Rotate` | `degrees`: number, `degreesX`: number, `degreesY`: number, `degreesZ`: number | Rotate reference `AnimatableView` by props from center | `degrees` is an alias of `degreesZ` |
 | `Fade` | `value`: number | Chance opacity of referenced `AnimatableView` to `value` | - |
 | `Change` | `field`: string, `value`: number | Chance a style property `field` of referenced `AnimatableView` to `value` | (1) Only one of these can apply to an `AnimatableView`, (2) This `Animator` does not use the native driver, so use sparingly! |
+| `DebugAction` | `message`: string | Just prints the message to the console (does nothing in reverse) | - |
+| `Callback` | `action`: () => any | Calls the action (does nothing in reverse) | - |
 
-All of the above `Animator`s also take the following props:
+All of the visual `Animator`s above (`Move`, `Scale`, `Rotate`, `Fade`, `Change`) also take the following props:
 
 | Prop | Type | Description |
 | ---- | ---- | ----------- |
@@ -103,15 +106,17 @@ Triggers actually cause change to happen. This is where we take the user's actio
 | `WhileScrolling` | `direction`: `up`, `down`, or `either`, `driver`: `ScrollDriver` | Plays forward when associated `ScrollView` is scrolling in `direction`, otherwise plays backward | See [Scroll Direction Demo](https://github.com/ChefSteps/react-native-declan/blob/master/examples/views/ScrollDirectionDemo/index.js) for an example of how to hook it up to the `ScrollView` |
 | `StateGroup` | `defaultState`: string | This is a sort of wrapper Trigger for `State` | Trigger a specific state by calling `goToState` on this component's ref |
 | `State` | `name`: string | Will trigger its `Animator`s when parent `StateGroup` changes to this state, and play backward when changed away from this state | - |
+| `SwipingAnimation` | `getSourceRef`: () => `SwipeGesture` | Plays forward when associated `SwipeGesture` is swiped forward and returns to resting state when going backward | See [Swipe Demo](https://github.com/ChefSteps/react-native-declan/blob/master/examples/views/SwipeDemo/index.js) for examples of how to hook it up to a swipe-able view |
+| `Swiped` | `getSourceRef`: () => `SwipeGesture`, `how`: `toActive`, `toInactive`, or `toEither` | Triggered when the associated `SwipeGesture` is swiped | See [Swipe Demo](https://github.com/ChefSteps/react-native-declan/blob/master/examples/views/SwipeDemo/index.js) for examples of how to hook it up to a swipe-able view |
 
 ### Higher-Order animators
 
 | Name | Props | Description |
 | ---- | ----- | ----------- |
-| Parallel | - | When started, plays all its children forward, when stopped plays them backward |
-| Cycle | - | Plays its children `Animator`s playing forward, and restarts them all when the last one finishes playing |
-| Sequence | - | Plays each child `Animator` forward one-by-one (when the first finishes, second one beings, etc.) |
-| Stagger | `eachDelay`: number | When started, plays each child `Animator` with delay `eachDelay` between then, same behavior on stop |
+| `Parallel` | - | When started, plays all its children forward, when stopped plays them backward |
+| `Cycle` | - | Plays its children `Animator`s playing forward, and restarts them all when the last one finishes playing |
+| `Sequence` | - | Plays each child `Animator` forward one-by-one (when the first finishes, second one beings, etc.) |
+| `Stagger` | `eachDelay`: number | When started, plays each child `Animator` with delay `eachDelay` between then, same behavior on stop |
 
 All of the higher-order components also pass onto its children the following properties:
 - `getTargetRef`
@@ -131,6 +136,19 @@ See the [Stagger Demo](https://github.com/ChefSteps/react-native-declan/blob/mas
 ### Components
 
 Finally, react-native-declan has a set of components that can be manipulated through animators and triggers. Right now, the only component is a static view, but that will soon change.
+
+### Behaviors
+
+> Note: this may change in the future as we determine whether the `Behavior` model or the `Driver` model is more appropriate for react-native.
+
+| Name | Prop | Description |
+| ---- | ----- | ----------- |
+| `SwipeGesture`* | `type`: `active` | Only type supported right now |
+| | `direction`: `left`, `right`, `up`, or `down` | Direction to detect the swipe. Will also detect a swipe in the opposite direction to go back to `inActive` state |
+| | `length`: number | How long does the user need to swipe for it be considered "successful" (note, also fast swipes will count as success) |
+| | `edge`: `left`, `right`, `top`, `bottom` | To only enable swipes from the edge of an element |
+| | `hitSize`: number | For `edge`, how far from the edge is in play to start the gesture |
+| | | * See [Swipe Demo](https://github.com/ChefSteps/react-native-declan/blob/master/examples/views/SwipeDemo/index.js) for examples of how to hook it up to a swipe-able view by using the `PanEventEmitter` |
 
 ## Contributing
 If you are interested in contributing to react-native-declan or have feedback, please contact us. Pull requests are also welcome.

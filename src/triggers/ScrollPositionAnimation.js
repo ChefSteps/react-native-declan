@@ -17,23 +17,27 @@ class ScrollPositionAnimation extends BaseTrigger {
     this.from = props.from;
     this.to = props.to;
     this.driver = props.driver;
-    this.propertiesToAppend = {
-      driverValue: (this.from < this.to)
-        ? this.driver.value.interpolate({
-            inputRange: [this.from, this.to],
-            outputRange: [0, 1],
-          })
-        : this.driver.value.interpolate({
-          inputRange: [this.to, this.from],
-          outputRange: [1, 0],
-        })
-    };
+  }
+
+  componentDidMount() {
+    this.setState({
+      propertiesToAppend: {
+        driverValue: (this.from < this.to)
+          ? this.driver.value.interpolate({
+              inputRange: [this.from, this.to],
+              outputRange: [0, 1],
+            })
+          : this.driver.value.interpolate({
+            inputRange: [this.to, this.from],
+            outputRange: [1, 0],
+          }),
+      }
+    });
   }
 
   from: number;
   to: number;
   driver: ScrollDriver;
-  propertiesToAppend: Object;
 }
 
 export default ScrollPositionAnimation;

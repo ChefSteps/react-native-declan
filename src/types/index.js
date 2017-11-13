@@ -41,3 +41,14 @@ export type DriverAnimatorProps = {
 export interface Driver {
   value: Animated.Value,
 }
+
+export type Layout = {
+  x: number,
+  y: number,
+  width: number,
+  height: number,
+};
+
+export type LayoutEvent = {
+  nativeEvent: { layout: Layout },
+};

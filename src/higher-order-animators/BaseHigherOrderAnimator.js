@@ -14,19 +14,23 @@ const propWhitelist = [
   'delay',
   'durationBack',
   'easingBack',
-  'delayBack'
+  'delayBack',
+  'driverValue',
 ];
 
 class BaseHigherOrderAnimator extends ManualTrigger {
-  constructor(props) {
-    super(props);
-    console.log('BaseHigherOrderAnimator');
-    const propsClone = pick(propWhitelist, props);
+  componentDidMount() {
+    this.updateProperties(this.props);
+  }
 
-    this.propertiesToAppend = {
-      ...(this.propertiesToAppend || {}),
-      ...(propsClone || {})
-    };
+  updateProperties = (props) => {
+    const propsClone = pick(propWhitelist, props);
+    this.setState({
+      propertiesToAppend: {
+        ...(this.state.propertiesToAppend || {}),
+        ...(propsClone || {})
+      }
+    });
   }
 }
 

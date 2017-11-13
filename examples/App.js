@@ -27,7 +27,6 @@ const HomeScreen = ({navigation}) => (
       onPress={() => navigation.navigate('TinyBeansDemo')}
       title="Tiny Beans"
     />
-
     <Button
       onPress={() => navigation.navigate('SwipeDemo')}
       title="Swipe"

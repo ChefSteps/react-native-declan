@@ -15,9 +15,11 @@ type Props = {
 class WhileScrolling extends ManualTrigger {
   constructor(props: Props) {
     super();
-    this.animators = [];
     this.direction = props.direction;
     this.driver = props.driver;
+  }
+
+  componentDidMount() {
     this.driver.scrollDirectionEmitter.addListener(
       'directionChanged',
       (newDirection: ScrollDirection) => {

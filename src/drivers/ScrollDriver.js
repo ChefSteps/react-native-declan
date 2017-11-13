@@ -5,18 +5,7 @@
 import { Animated } from 'react-native';
 import EventEmitter from 'eventemitter3';
 
-import { Driver } from '../types';
-
-type Layout = {
-  x: number,
-  y: number,
-  width: number,
-  height: number,
-};
-
-type LayoutEvent = {
-  nativeEvent: { layout: Layout },
-};
+import { Driver, Layout, LayoutEvent } from '../types';
 
 type ScrollViewProps = {
   onScroll: Animated.event,

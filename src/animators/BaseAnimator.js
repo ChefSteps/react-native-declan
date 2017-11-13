@@ -31,47 +31,63 @@ class BaseAnimator<D, P: any, S> extends Component<D, P, S>
   }
 
   componentDidMount() {
-    this.target = this.props.getTargetRef();
-    this.target.registerAnimationTransformation(
-      // $FlowFixMe
-      this.getAnimationTransformation(),
-    );
+    this.registerAnimationTransformation();
+  }
+
+  componentDidUpdate() {
+    if (this.props.driverValue) {
+      this.progress = this.props.driverValue;
+    }
+    this.registerAnimationTransformation();
+  }
+
+  registerAnimationTransformation = () => {
+    this.target = this.props.getTargetRef ? this.props.getTargetRef() : null;
+    this.target &&
+      this.target.registerAnimationTransformation &&
+      this.target.registerAnimationTransformation(
+        this.id,
+        // $FlowFixMe
+        this.getAnimationTransformation(),
+      );
   }
 
   reset = () => {
     this.progress.setValue(0);
-  }
+  };
 
   shouldUseNativeDriver = () => true;
 
   start() {
-    this.progress.stopAnimation();
+    this.progress.stopAnimation && this.progress.stopAnimation();
     Animated.timing(this.progress, {
       toValue: 1,
       duration: this.props.duration,
       delay: this.props.delay,
       easing: this.props.easing,
       useNativeDriver: this.shouldUseNativeDriver(),
-    }).start(({finished}) => this.props.onFinish && this.props.onFinish({finished}));
+    }).start(
+      ({ finished }) =>
+        this.props.onFinish && this.props.onFinish({ finished }),
+    );
   }
 
   stop() {
-    this.progress.stopAnimation();
+    this.progress.stopAnimation && this.progress.stopAnimation();
     Animated.timing(this.progress, {
       toValue: 0,
       duration: this.props.durationBack || this.props.duration,
       delay: this.props.delayBack || this.props.delay,
       easing: this.props.easingBack || this.props.easing,
       useNativeDriver: this.shouldUseNativeDriver(),
-    }).start(({finished}) => this.props.onFinishBack && this.props.onFinishBack({finished}));
+    }).start(
+      ({ finished }) =>
+        this.props.onFinishBack && this.props.onFinishBack({ finished }),
+    );
   }
 
   render() {
-    return (
-      <View>
-        {this.props.children}
-      </View>
-    );
+    return <View>{this.props.children}</View>;
   }
 }
 

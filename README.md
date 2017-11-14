@@ -103,8 +103,8 @@ All of the visual `Animator`s above (`Move`, `Scale`, `Rotate`, `Fade`, `Change`
 ### Triggers
 
 Triggers actually cause change to happen. This is where we take the user's actions into account. There are three types of triggers:
-- Pulse triggers - play a set of animators forward)
-- While triggers - play forward while a condition is met, and play backward otherwise)
+- Pulse triggers - play a set of animators forward
+- While triggers - play forward while a condition is met, and play backward otherwise
 - Gesture-responsive triggers - animators that play in response to, and in proportion to, some user gesture
 
 #### Supported triggers

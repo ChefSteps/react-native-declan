@@ -2,13 +2,13 @@
 
 import uuid from 'uuid';
 
-import AnimatableView from '../components/AnimatableView';
+import Declan from '../components';
 import BaseTrigger from './BaseTrigger';
 import { Animator, type AnimatedValue } from '../types';
 
 class ManualTrigger extends BaseTrigger implements Animator {
   id: string;
-  target: ?AnimatableView;
+  target: ?Declan.View;
   value: AnimatedValue;
 
   constructor(props) {

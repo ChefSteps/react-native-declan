@@ -1,13 +1,13 @@
 // @flow
 
 import { Animated, Easing } from 'react-native';
-import AnimatableView from '../components/AnimatableView';
+import Declan from '../components';
 
 export type AnimatedValue = Animated.Value | Animated.ValueXY;
 
 export interface Animator {
   id: string,
-  target: ?AnimatableView,
+  target: ?Declan.View,
   value: AnimatedValue,
   start(): void,
   stop(): void,
@@ -15,7 +15,7 @@ export interface Animator {
 }
 
 export type BaseAnimatorProps = {
-  getTargetRef: () => AnimatableView,
+  getTargetRef: () => Declan.View,
   initialValue?: number | { x: number, y: number },
   onFinish?: () => void,
   onFinishBack?: () => void,

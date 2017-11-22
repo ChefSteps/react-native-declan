@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { Animated, View } from 'react-native';
 import uuid from 'uuid';
 
-import AnimatableView from '../components/AnimatableView';
+import Declan from '../components';
 import { Animator, type AnimatedValue } from '../types';
 
 class BaseAnimator<D, P: any, S> extends Component<D, P, S>
@@ -16,7 +16,7 @@ class BaseAnimator<D, P: any, S> extends Component<D, P, S>
   getAnimationTransformation: $Abstract<() => Object>;
 
   id: string;
-  target: ?AnimatableView;
+  target: ?Declan.View;
   progress: AnimatedValue;
 
   props: P;

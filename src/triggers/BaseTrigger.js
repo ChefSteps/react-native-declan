@@ -9,9 +9,9 @@ import EventEmitter from 'eventemitter3';
 class BaseTrigger<D, P: any, S> extends Component<D, P, S> {
   static defaultProps: $Abstract<D>;
   state: $Abstract<S> & {
-    propertiesToAppend: {};
+    propertiesToAppend: {},
   } = {
-    propertiesToAppend: {}
+    propertiesToAppend: {},
   };
   props: P & {
     children: typeof Children,
@@ -41,8 +41,18 @@ class BaseTrigger<D, P: any, S> extends Component<D, P, S> {
           animator.ref(ref);
         }
       },
-      onFinish: ({finished}) => events.emit('finish', {finished}),
-      onFinishBack: ({finished}) => events.emit('finish_back', {finished}),
+      onFinish: ({ finished }) => {
+        if (animator.props.onFinish) {
+          animator.props.onFinish({ finished });
+        }
+        events.emit('finish', { finished });
+      },
+      onFinishBack: ({ finished }) => {
+        if (animator.props.onFinishBack) {
+          animator.props.onFinishBack({ finished });
+        }
+        events.emit('finish_back', { finished });
+      },
     });
   };
 
@@ -57,11 +67,7 @@ class BaseTrigger<D, P: any, S> extends Component<D, P, S> {
   }
 
   render() {
-    return (
-      <View>
-        {this.processChildren()}
-      </View>
-    );
+    return <View>{this.processChildren()}</View>;
   }
 }
 

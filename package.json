@@ -1,6 +1,6 @@
 {
   "name": "react-native-declan",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "Declarative Animations for React Native",
   "main": "index.js",
   "directories": {
